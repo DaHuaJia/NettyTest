@@ -15,9 +15,13 @@ import java.util.concurrent.Executors;
 public class BIOServer {
 
     /**
-     * javaBIO是java最先出现的tcp网络连接方式
+     * 特点：
+     * javaBIO是java最先出现的tcp网络连接方式，事件驱动、同步、阻塞。
      * 服务器的实现模式为一个连接对应一个线程，即客户端有连接请求时服务器就需要启动一个线程进行处理，
      * 如果这个连接不做任何事情也会造成不必要的线程开销
+     * 适用场景：
+     * BIO方式适用于连接数目比较小且固定的架构，这种方式对服务器资源的要求比较高，并发局限于应用中，
+     * JDK1.4 以前的唯一选择，程序简单易于理解。
      */
 
     public static void main(String[] args) throws IOException {
@@ -42,7 +46,6 @@ public class BIOServer {
                     handler(socket);
                 }
             });
-
         }
     }
 
