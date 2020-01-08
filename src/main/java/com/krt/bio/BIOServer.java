@@ -2,6 +2,7 @@ package com.krt.bio;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -73,6 +74,7 @@ public class BIOServer {
                     System.out.print("线程 "+Thread.currentThread().getId()+"-"+Thread.currentThread().getName()+" = ");
                     // 输入读取的数据，字节数组转string，从0至read
                     System.out.println(new String(bytes,0,read));
+
                 }else{
                     break;
                 }

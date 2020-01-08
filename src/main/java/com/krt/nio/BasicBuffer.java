@@ -39,5 +39,14 @@ public class BasicBuffer {
             System.out.println(intBuffer.get());
         }
 
+        // 该方法并没有江buffer中的数据清除，而是仅将其各个标志位置为初始状态
+        // intBuffer.clear();
+
+        /**
+         * 在实际的java网络编程中，我们常用的是ByteBuffer，因为在网络数据传输的过程中，
+         * 主要是使用Byte
+         */
+
     }
+
 }
