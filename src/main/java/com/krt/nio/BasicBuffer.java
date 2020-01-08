@@ -43,8 +43,8 @@ public class BasicBuffer {
         // intBuffer.clear();
 
         /**
-         * 在实际的java网络编程中，我们常用的是ByteBuffer，因为在网络数据传输的过程中，
-         * 主要是使用Byte
+         * 在实际的java网络编程中，我们常用的是ByteBuffer，
+         * 因为在网络数据传输的过程中，主要是使用Byte
          */
 
     }
