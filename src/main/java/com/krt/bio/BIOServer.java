@@ -43,6 +43,7 @@ public class BIOServer {
 
             // 开启一个子线程去维护和客户端之间的连接
             newCachedThreadPool.execute(new Runnable() {
+                @Override
                 public void run() {
                     handler(socket);
                 }
@@ -97,7 +98,7 @@ public class BIOServer {
      * 客户端使用window自带的telnet
      * cmd命令如下：telnet [IP地址] [端口号]
      * telnet 127.0.0.1 6666
-     * ctrl + [ + ] 即可进入telnet 命令行，通过send message 即可发送数据
+     * ctrl + ] 即可进入telnet 命令行，通过send message 即可发送数据
      */
 
 }
