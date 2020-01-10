@@ -22,7 +22,7 @@ public class NIOServer {
 
         // 创建Selector (通道选择器)
         Selector selector = Selector.open();
-        // 将 serverSocketChannel注册到selector上，并设置监听事件为OP_ACCEPT
+        // 将 serverSocketChannel注册到selector上，并设置监听事件为OP_ACCEPT，表明该通道只关注OP_ACCEPT事件，不关注其他事件
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 
         // 循环等待客户端连接
@@ -50,8 +50,9 @@ public class NIOServer {
                     // 对该客户端生成一个SocketChannel
                     SocketChannel socketChannel = serverSocketChannel.accept();
                     System.out.println("connection is success.="+socketChannel.hashCode());
+                    // 设置通道为非阻塞
                     socketChannel.configureBlocking(false);
-                    // 将当前的socketChannel 注册到selector上，并绑定一个Buffer
+                    // 将当前的socketChannel 注册到selector上，并绑定一个Buffer，设置该通道的关注事件为OP_READ
                     socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(50));
 
                     // OP_READ: 客户端发送消息进来，读事件
@@ -65,11 +66,21 @@ public class NIOServer {
                     buffer.clear();
                     // 向客户端回告信息
                     channel.write(ByteBuffer.wrap("Hello Client.".getBytes()));
+
+                    /**
+                     * 该方法可以修改通道所关注的事件
+                     * key.interestOps(SelectionKey.OP_WRITE)
+                     */
                 }
 
                 // 手动从集合中移除当前的selectionKeys，防止重复操作
                 keyIterator.remove();
             }
         }
+
+        /**
+         * 实际上，ServerSocketChannel主要负责客户端的Socket连接请求，并为请求连接的客户端分配单独的通道连接SocketChannel。
+         * SocketChannel则负责具体的客户端和服务端之间的读写操作
+         */
     }
 }
