@@ -54,7 +54,7 @@ public class GroupChatServer {
                     while (iterator.hasNext()) {
                         SelectionKey key = iterator.next();
                         // 判断事件发生的类型 连接事件
-                        if(key.isAcceptable()) {
+                        if(key.isAcceptable()){
                             // 建立客户端SocketChannel
                             SocketChannel sc = listenChannel.accept();
                             // 设置为非阻塞
@@ -62,7 +62,9 @@ public class GroupChatServer {
                             // 将该客户端通道注册到selector，并设置关注事件为读事件
                             sc.register(selector, SelectionKey.OP_READ);
                             // 提示
-                            System.out.println(sc.getRemoteAddress() + " 上线 ");
+                            String connect = sc.getRemoteAddress() + " 上线了... ";
+                            System.out.println(connect);
+                            sendInfoToOtherClients(connect, sc);
                         }
                         // 通道发送read事件，即通道是可读的状态
                         if(key.isReadable()) {
@@ -108,11 +110,17 @@ public class GroupChatServer {
 
         }catch (IOException e){
             try {
-                System.out.println(channel.getRemoteAddress() + " 离线了..");
-                //取消注册
+                /**
+                 * 客户端断开连接属于客户端通道的读事件
+                 * 在读取通道消息 channel.read(buffer) 的时候会抛出异常
+                 */
+                String close = channel.getRemoteAddress() + " 离线了..";
+                System.out.println(close);
+                // 取消注册
                 key.cancel();
-                //关闭通道
+                // 关闭通道
                 channel.close();
+                sendInfoToOtherClients(close, channel);
             }catch (IOException e2) {
                 e2.printStackTrace();
             }
@@ -125,19 +133,23 @@ public class GroupChatServer {
      * @param self
      * @throws IOException
      */
-    private void sendInfoToOtherClients(String msg, SocketChannel self ) throws IOException{
-        // 将msg存储到buffer
-        ByteBuffer buffer = ByteBuffer.wrap(msg.getBytes());
-        // 遍历所有注册到selector上的 SocketChannel,并排除自己
-        for(SelectionKey key: selector.keys()) {
-            //通过key取出对应的SocketChannel
-            Channel targetChannel = key.channel();
-            //排除自己
-            if(targetChannel instanceof  SocketChannel && targetChannel != self) {
-                SocketChannel dest = (SocketChannel)targetChannel;
-                //将buffer的数据写入通道
-                dest.write(buffer);
+    private void sendInfoToOtherClients(String msg, SocketChannel self ){
+        try{
+            // 将msg存储到buffer
+            ByteBuffer buffer = ByteBuffer.wrap(msg.getBytes());
+            // 遍历所有注册到selector上的 SocketChannel,并排除自己
+            for(SelectionKey key: selector.keys()) {
+                //通过key取出对应的SocketChannel
+                Channel targetChannel = key.channel();
+                //排除自己
+                if(targetChannel instanceof  SocketChannel && targetChannel != self) {
+                    SocketChannel dest = (SocketChannel)targetChannel;
+                    //将buffer的数据写入通道
+                    dest.write(buffer);
+                }
             }
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 
