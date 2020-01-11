@@ -14,8 +14,8 @@ import java.util.Arrays;
  */
 public class ScatterAndGather {
     /**
-     * Scattering：将数据写入到buffer时，可以采用buffer数组，依次写入 （分散）
-     * Gathering：从buffer读取数据时，可以采用buffer数组，依次读取
+     * Scattering：将数据写入到buffer数组时，可以采用buffer数组，依次写入（分散），一个buffer写满了就接着写下一个buffer
+     * Gathering：从buffer数组读取数据时，可以采用buffer数组，依次读取（汇总），一个buffer读完了就接着读取下一个buffer
      */
     public static void main(String[] args) throws Exception{
         // 通过open()方法创建一个服务端ServerSocketChannel套接字通道

@@ -10,8 +10,11 @@ import java.nio.ByteBuffer;
 public class ByteBufferPutGet {
 
     public static void main(String[] args) {
-        // 创建一个Buffer
+        // 创建一个ByteBuffer
         ByteBuffer buffer = ByteBuffer.allocate(100);
+        /**
+         * 除了ByteBuffer之外，还有LongBuffer、CharBuffer、FloatBuffer、StringBuffer、ShortBuffer 等。
+         */
 
         // 类型化方式放入数据
         buffer.putInt(10);
