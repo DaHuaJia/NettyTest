@@ -19,6 +19,8 @@ public class NettyServer {
          * 创建两个线程组 bossGroup和workerGroup
          * bossGroup只处理连接请求，真正的和客户端进行业务处理的是workerGroup
          * 两个都是无限循环
+         *
+         * bossGroup和workerGroup含有子线程的个数，默认是CPU核数*2。NettyRuntime.availableProcessors()方法可以获取CPU核数
          */
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
