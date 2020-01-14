@@ -45,6 +45,16 @@ public class NettyServer {
                 }
             });
 
+            // 也可以通过链式编程，直接进行监听
+            /**
+             * bootstrap.bind(6666).sync().addListener(new ChannelFutureListener() {
+             *      @Override
+             *      public void operationComplete(ChannelFuture channelFuture) throws Exception {
+             *
+             *      }
+             * })
+             */
+
         }finally {
             // 优雅关闭
         }

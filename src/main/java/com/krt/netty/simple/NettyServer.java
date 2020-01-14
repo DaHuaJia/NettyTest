@@ -55,7 +55,7 @@ public class NettyServer {
 
             // 启动服务器，绑定端口并开启同步，生成一个ChannelFuture对象
             ChannelFuture cf = bootstrap.bind(6666).sync();
-            // 对关闭通道进行监听
+            // 对关闭通道事件做异步处理
             cf.channel().closeFuture().sync();
         }finally {
             // 优雅关闭
