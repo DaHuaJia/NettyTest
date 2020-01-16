@@ -47,7 +47,7 @@ public class MyServer {
                              */
                             pipeline.addLast(new IdleStateHandler(3,5,7, TimeUnit.SECONDS));
                             // 对心跳做进一步处理
-                            pipeline.addLast(new MyserverHandler());
+                            pipeline.addLast(new MyServerHandler());
                         }
                     });
 
