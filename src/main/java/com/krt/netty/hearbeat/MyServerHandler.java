@@ -9,7 +9,7 @@ import io.netty.handler.timeout.IdleStateEvent;
  * @Description Netty心跳检测机制处理类
  * @Date 2020/1/16 17:21
  */
-public class MyserverHandler extends ChannelInboundHandlerAdapter {
+public class MyServerHandler extends ChannelInboundHandlerAdapter {
 
     /**
      * 进一步处理心跳事件，IdleStateEvent触发该方法
