@@ -53,7 +53,7 @@ public class ChatClient {
                     });
 
             // 异步启动连接服务端
-            ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
+            ChannelFuture channelFuture = bootstrap.connect(host, port);
             // 监听是否启动
             channelFuture.addListener(new ChannelFutureListener() {
                 @Override

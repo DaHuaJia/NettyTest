@@ -57,7 +57,7 @@ public class ChatServer {
 
             try {
                 // 启动监听
-                ChannelFuture channelFuture = bootstrap.bind(port).sync();
+                ChannelFuture channelFuture = bootstrap.bind(port);
                 channelFuture.addListener(new ChannelFutureListener() {
                     @Override
                     public void operationComplete(ChannelFuture channelFuture) {
@@ -69,18 +69,8 @@ public class ChatServer {
                     }
                 });
 
-                // 关闭监听
-                ChannelFuture closeFuture = channelFuture.channel().closeFuture().sync();
-                closeFuture.addListener(new ChannelFutureListener() {
-                    @Override
-                    public void operationComplete(ChannelFuture channelFuture) throws Exception {
-                        if(channelFuture.isSuccess()){
-                            System.out.println("服务端已关闭");
-                        }else{
-                            System.out.println("服务端关闭失败。");
-                        }
-                    }
-                });
+                // 阻塞等待关闭监听
+                channelFuture.channel().closeFuture().sync();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

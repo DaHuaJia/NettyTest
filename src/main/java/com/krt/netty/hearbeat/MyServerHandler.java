@@ -37,4 +37,8 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
         }
     }
 
+    /**
+     * 客户端可以使用群聊天系统的客户端
+     */
+
 }
