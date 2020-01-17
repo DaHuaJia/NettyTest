@@ -10,7 +10,7 @@ import io.netty.channel.ChannelFutureListener;
  * @Date 2020年1月14日20:36:28
  */
 public class NettyServer {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         try{
             /**
              * Netty服务端初始化，这里主要演示ChannelFuture，省略其他代码
@@ -24,7 +24,7 @@ public class NettyServer {
              *
              * 异步处理不会造成线程的阻塞，相比于传统IO，在高并发的情况下，效果更好
              */
-            ChannelFuture cf = bootstrap.bind(6666).sync();
+            ChannelFuture cf = bootstrap.bind(6666);
 
             // 通过ChannelFuture对象注册监听器，当bind()方法执行完毕时，监听器被触发
             cf.addListener(new ChannelFutureListener() {
