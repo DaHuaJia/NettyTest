@@ -1,0 +1,41 @@
+// 指定版本
+syntax = "proto3";
+// 加快解析
+option optimize_for = SPEED;
+// 指定生成到哪个包下
+option java_package = "com.krt.netty.protobuf2";
+// 指定外部类的名称
+option java_outer_classname = "MyDataInfo";
+
+
+// protobuf可以使用message管理其他的message
+message MyMessage{
+    // 定义枚举类型。在proto3中要求enum的编号从0开始
+    enum DataType{
+        StudentType = 0;
+        WorkerType = 1;
+    }
+
+    // 用type来标识传的是哪一个枚举类型。即通过type类型我们就可以判断当前对象是哪一个对象。
+    // 如果type=StudentType表示该对象是Student的实例，如果type=WorkerType则为Worker的实例
+    DataType type = 1;
+
+    // oneof进行约束，其包括的属性只能出现其中的一个
+    oneof body{
+        Student student = 2;
+        Worker worker = 3;
+    }
+}
+
+
+// Student内部类属性
+message Student {
+    int32 id = 1;
+    string name = 2;
+}
+
+// Worker内部类属性
+message Worker{
+    string name = 1;
+    int32 age = 2;
+}
