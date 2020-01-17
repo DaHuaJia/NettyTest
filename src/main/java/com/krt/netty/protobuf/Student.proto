@@ -1,0 +1,12 @@
+// 指定proto版本
+syntax = "proto3";
+// 生成的Java类名称，同时也是文件名
+option java_outer_classname = "StudentPOJO";
+// message 表示管理的数据类型
+message Student {  // 会在StudentPOJO这个类中生成一个外部类Student，它是真正发送的对象
+    // 表示Student类中，有一个属性为id，类型为int32（protobuf类型），排在第一位。
+    // 注意：等号后面的值表示序号，而不是值
+    int32 id = 1;
+    // 属性名称name，属性类型string（对应java的String）
+    string name = 2;
+}
