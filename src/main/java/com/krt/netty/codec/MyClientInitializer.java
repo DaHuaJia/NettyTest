@@ -19,6 +19,11 @@ public class MyClientInitializer extends ChannelInitializer<SocketChannel> {
          */
         pipeline.addLast(new MyLongToByteEncoder());
 
+        /**
+         * 加入一个入站的handler对数据进行编码，添加自定义的解码器
+         */
+        pipeline.addLast(new MyByteToLongDecoder());
+
         // 加入自定义的handler 处理业务
         pipeline.addLast(new MyClientHandler());
 

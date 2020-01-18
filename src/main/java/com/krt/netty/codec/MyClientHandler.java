@@ -14,14 +14,14 @@ public class MyClientHandler extends SimpleChannelInboundHandler<Long> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Long msg) {
-
+        System.out.println("received server msg = "+msg);
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
         System.out.println("channelActive 发送数据");
         // 发送一个Long类型数据
-        // ctx.writeAndFlush(123456L)
+         //ctx.writeAndFlush(123456L);
 
         // 发送一个字符串
         ctx.writeAndFlush(Unpooled.copiedBuffer("abcdefghhgfedcba", CharsetUtil.UTF_8));

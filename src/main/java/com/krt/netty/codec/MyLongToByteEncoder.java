@@ -21,7 +21,7 @@ public class MyLongToByteEncoder extends MessageToByteEncoder<Long> {
     @Override
     protected void encode(ChannelHandlerContext ctx, Long msg, ByteBuf byteBuf) {
         System.out.println("MyLongToByteEncoder encoder编码器被调用");
-        System.out.println("msg = "+msg);
+        System.out.println("编码 msg = "+msg);
         byteBuf.writeLong(msg);
     }
 
@@ -38,6 +38,10 @@ public class MyLongToByteEncoder extends MessageToByteEncoder<Long> {
      *
      * 例如：
      * 该编码器指定的类型为Long，那么当写入的类型是String时，该编码器便不会被调用。
+     */
+
+    /**
+     * 无论是编码器handler还是解码器handler，其接收到的数据类型必须与待处理的消息类型一致，否则该handler不会被执行。
      */
 
 }

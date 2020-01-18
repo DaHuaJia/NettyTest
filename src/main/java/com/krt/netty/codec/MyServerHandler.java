@@ -14,6 +14,9 @@ public class MyServerHandler extends SimpleChannelInboundHandler<Long> {
     protected void channelRead0(ChannelHandlerContext ctx, Long msg) {
         // 打印接收到的Long类型数据
         System.out.println("["+ctx.channel().id()+"] Long = "+msg);
+
+        // 给客户端回送消息
+        ctx.writeAndFlush(654321L);
     }
 
     @Override
