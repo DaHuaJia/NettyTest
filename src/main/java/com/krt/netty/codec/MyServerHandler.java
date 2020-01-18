@@ -5,13 +5,14 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
  * @Author gmd
- * @Description
+ * @Description Netty编解码器实例 服务端处理器类
  * @Date 2020/1/17 21:23
  */
 public class MyServerHandler extends SimpleChannelInboundHandler<Long> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Long msg) {
+        // 打印接收到的Long类型数据
         System.out.println("["+ctx.channel().id()+"] Long = "+msg);
     }
 

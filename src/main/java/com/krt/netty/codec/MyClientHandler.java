@@ -7,7 +7,7 @@ import io.netty.util.CharsetUtil;
 
 /**
  * @Author gmd
- * @Description
+ * @Description Netty编解码器实例 服务端初始化类
  * @Date 2020/1/17 21:56
  */
 public class MyClientHandler extends SimpleChannelInboundHandler<Long> {
@@ -21,9 +21,14 @@ public class MyClientHandler extends SimpleChannelInboundHandler<Long> {
     public void channelActive(ChannelHandlerContext ctx) {
         System.out.println("channelActive 发送数据");
         // 发送一个Long类型数据
-        // ctx.writeAndFlush(123456L);
+        // ctx.writeAndFlush(123456L)
 
+        // 发送一个字符串
         ctx.writeAndFlush(Unpooled.copiedBuffer("abcdefghhgfedcba", CharsetUtil.UTF_8));
+
+        /**
+         * 我们可以通过对比，测试分别发送Long 和 字符串的输出情况。
+         */
     }
 
 }

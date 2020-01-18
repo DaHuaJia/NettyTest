@@ -7,7 +7,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 /**
  * @Author gmd
- * @Description
+ * @Description Netty编解码器实例 服务端启动类
  * @Date 2020/1/17 21:27
  */
 public class MyClient {
@@ -28,6 +28,6 @@ public class MyClient {
         }finally {
             group.shutdownGracefully();
         }
-
     }
+
 }

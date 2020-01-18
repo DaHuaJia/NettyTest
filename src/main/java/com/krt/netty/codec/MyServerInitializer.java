@@ -6,7 +6,7 @@ import io.netty.channel.socket.SocketChannel;
 
 /**
  * @Author gmd
- * @Description
+ * @Description Netty编解码器实例 服务端handler配置类
  * @Date 2020/1/17 21:16
  */
 public class MyServerInitializer extends ChannelInitializer<SocketChannel> {
@@ -15,9 +15,11 @@ public class MyServerInitializer extends ChannelInitializer<SocketChannel> {
     protected void initChannel(SocketChannel ch) {
         ChannelPipeline pipeline = ch.pipeline();
 
-        // 自定义入站handler进行解码
+        /**
+         * 自定义入站handler进行解码，加入自定义的解码器
+         */
         pipeline.addLast(new MyByteToLongDecoder());
-
+        // 自定义handler 业务逻辑处理
         pipeline.addLast(new MyServerHandler());
 
     }

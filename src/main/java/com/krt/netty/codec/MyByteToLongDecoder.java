@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @Author gmd
- * @Description
+ * @Description Netty编解码器实例 解码器
  * @Date 2020/1/17 21:19
  */
 public class MyByteToLongDecoder extends ByteToMessageDecoder {
@@ -30,5 +30,14 @@ public class MyByteToLongDecoder extends ByteToMessageDecoder {
             list.add(byteBuf.readLong());
         }
     }
+
+    /**
+     * 例如：
+     * 如果客户端发送的消息并非Long类型，而是字符串"abcdefghhgfedcba"时，该字符串有16个字符，
+     * 那么该解码器的decode()方法会被调用两次，且每次截取的8个字符读取，读取完成之后交给下一个handler处理，依次循环。
+     *
+     * 同样的，如果客户端发送的数据是null，decode()方法就会被等待，直到通道中有8个字符，如果满足了8个字符，
+     * 但是，如果decode()方法结束后 list 为空，那么它也不会进入下一个handler。
+     */
 
 }
