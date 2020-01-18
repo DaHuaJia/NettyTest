@@ -13,6 +13,10 @@ public class MessageProtocol {
      * 同时也需要自定义对应的编解码器。
      */
 
+    /**
+     * 由于已经获取到了数据的长度，因此在从管道中读取数据时，只需要读取确定的数据即可，便不存在拆包和粘包的问题
+     */
+
     private int len;
     private byte[] content;
 

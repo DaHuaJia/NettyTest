@@ -19,7 +19,7 @@ public class NettyServer {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
-        try{
+        try {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
@@ -41,7 +41,7 @@ public class NettyServer {
             System.out.println("服务器准备成功");
             ChannelFuture cf = bootstrap.bind(1234).sync();
             cf.channel().closeFuture().sync();
-        }finally {
+        } finally {
             // 优雅关闭
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
