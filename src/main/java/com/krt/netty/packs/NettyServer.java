@@ -2,7 +2,10 @@ package com.krt.netty.packs;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
@@ -22,7 +25,13 @@ public class NettyServer {
 
             bootstrap.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new NettyServerInitializer());
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel ch){
+                            ChannelPipeline pipeline = ch.pipeline();
+                            pipeline.addLast(new NettyServerHandler());
+                        }
+                    });
 
             System.out.println("服务器准备成功。。。");
             ChannelFuture cf = bootstrap.bind(1234).sync();
