@@ -69,3 +69,15 @@
 ### netty.protobuf2
 > Netty 发送多种POJO对象实例。ProtoBuf进阶版。一个 .proto 中包含了多个类，我们可以生成不同的类的对象，  
 > 并传给服务端，服务端接收不同类的对象，并将接收结果打印出来。
+### netty.codec
+> Netty编解码器实例。新建服务端和客户端，加入自定义编解码器，该编解码器为Long转Byte。  
+> 同时说明了编解码器的功能和用法，说明编解码器多次调用和不被调用的情况。
+### netty.example
+3. MyByteToLongDecoder
+> 该实例是一个解码器，主要介绍ReplayingDecoder，ReplayingDecoder是对ByteToMessageDecoder的进一步封装，
+> 通过实例说明其特殊功能和作用。
+### netty.packs
+> Netty数据粘包和拆包的问题，介绍粘包和拆包的情况和隐患。
+### netty.protocolTcp
+> Netty数据粘包和拆包解决办法，通过自定义消息协议和自定义编解码器处理粘包拆包问题。原理主要是创建消息协议对象，
+> 在数据传送的过程中，发送数据的大小，那么接收方即可按照指定的大小接收数据，防止粘包和拆包。
