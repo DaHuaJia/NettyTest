@@ -14,3 +14,4 @@
 > CMD命令进入需要编译的 xxx.proto 文件路径下，使用如下命令：  
 > protoc --java_out=. xxx.proto  
 > 若一切顺利，即可看到当前路径下新生成了一个.java文件。
+> 文档：https://developers.google.com/protocol-buffers/docs/proto   
